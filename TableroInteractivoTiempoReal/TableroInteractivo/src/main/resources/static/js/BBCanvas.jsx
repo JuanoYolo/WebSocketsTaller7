@@ -69,7 +69,6 @@ class BBCanvas extends React.Component {
     }
     drawPoint(x, y) {
             this.myp5.ellipse(x, y, 20, 20);
-            p.fill(123,123,123);
         }
     
     componentDidMount() {
