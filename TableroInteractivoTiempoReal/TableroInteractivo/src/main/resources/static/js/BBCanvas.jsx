@@ -1,6 +1,9 @@
 // Retorna la url del servicio. Es una función de configuración.
 function BBServiceURL() {
-    return 'ws://localhost:8080/bbService';
+    var host = window.location.host;
+    var url = 'wss://' + (host) + '/bbService';
+    console.log("URL Calculada: " + url);
+    return url;
 }
 class WSBBChannel {
     constructor(URL, callback) {
@@ -17,9 +20,9 @@ class WSBBChannel {
     onMessage(evt) {
         console.log("In onMessage", evt);
         // Este if permite que el primer mensaje del servidor no se tenga encuenta.
-            // El primer mensaje solo confirma que se estableció la conexión.
-            // De ahí en adelante intercambiaremos solo puntos(x,y) con el servidor
-            if(evt.data != "Connection established.") {
+        // El primer mensaje solo confirma que se estableció la conexión.
+        // De ahí en adelante intercambiaremos solo puntos(x,y) con el servidor
+        if (evt.data != "Connection established.") {
             this.receivef(evt.data);
         }
     }
@@ -68,9 +71,9 @@ class BBCanvas extends React.Component {
         }
     }
     drawPoint(x, y) {
-            this.myp5.ellipse(x, y, 20, 20);
-        }
-    
+        this.myp5.ellipse(x, y, 20, 20);
+    }
+
     componentDidMount() {
         this.myp5 = new p5(this.sketch, 'container');
         this.setState({ loadingState: 'Canvas Loaded' });
@@ -101,5 +104,5 @@ class Editor extends React.Component {
 }
 
 ReactDOM.render(
-    <Editor name="Daniel"/>, document.getElementById('root'))
+    <Editor name="Juano" />, document.getElementById('root'))
 
